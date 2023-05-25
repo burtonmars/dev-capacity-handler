@@ -1,8 +1,8 @@
 import React from 'react';
 
-import style from '../../styles/navbar.module.scss';
+import style from '../styles/header.module.scss';
 
-function Navbar() {
+function Header() {
   return (
     <div className={style.navbar__container}>
         <h1>Devacity</h1>
@@ -10,4 +10,4 @@ function Navbar() {
   )
 };
 
-export default Navbar;
+export default Header;
