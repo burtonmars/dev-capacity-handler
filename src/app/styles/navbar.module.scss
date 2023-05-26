@@ -1,13 +1,28 @@
 .navbar__container {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-end;
+    gap: 1rem;
+    padding-left: 2rem;
+    height: 4vh;
+    width: 100vw;
 
-    .navbar__storiesTab {
-
+    .navbar__storiesTab, .navbar__peopleTab {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--color-inactive-tab);
+        height: 100%;
+        width: 20vw;
+        max-width: 150px;
+        min-width: 100px;
+        border: none;
+        border-radius: 0.2rem 0.2rem 0 0;
+        border-bottom: 2px solid #fff;
     }
 
-    .navbar__peopleTab {
-        
+    .active {
+        background-color: var(--color-background);
+        border-bottom: none;
     }
 }
