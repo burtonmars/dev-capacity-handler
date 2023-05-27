@@ -19,6 +19,7 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@types/mongodb": "^4.0.7",
     "@types/node": "^20.2.5",
     "@types/node-sass": "^4.11.3"
   }

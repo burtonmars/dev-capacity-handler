@@ -1,4 +1,4 @@
-import { getDevelopers } from '../../../lib/developers'
+import { getDevelopers } from '../../../src/app/lib/developers'
 
 const handler = async (req, res) => {
   if (req.method === 'GET') {
@@ -12,7 +12,7 @@ const handler = async (req, res) => {
     }
   }
   res.setHeader('Allow', ['GET'])
-  res.status(425).end({ message: `Method ${req.method} not allowed` })
+  res.status(405).end({ message: `Method ${req.method} not allowed` })
 }
 
 export default handler

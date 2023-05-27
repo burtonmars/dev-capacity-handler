@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb'
+
 export type Ticket = {
   id: number
   title: string
@@ -6,8 +8,9 @@ export type Ticket = {
 }
 
 export type Developer = {
-  firstName: string
-  lastName: string
+  _id: string
+  first_name: string
+  last_name: string
   position: string
   level: string
   color: string

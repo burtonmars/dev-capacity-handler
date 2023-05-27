@@ -1,4 +1,4 @@
-import clientPromise from '../src/app/lib/mongodb'
+import clientPromise from './mongodb'
 
 let client
 let db

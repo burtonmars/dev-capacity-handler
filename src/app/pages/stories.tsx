@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import style from '../styles/stories.module.scss';
 import SubHeader from '../components/subheader';
 import StorySection from '../components/story-section';
+import { Developer } from '../lib/types';
 
 const sections = [
     {
@@ -23,7 +24,11 @@ const sections = [
     }
 ];
 
-function Stories() {
+interface StoriesProps {
+    developers: Developer[];
+}
+
+function Stories({ developers }: StoriesProps ) {
   return (
     <div className={style.stories__mainContainer}>
         <SubHeader />
