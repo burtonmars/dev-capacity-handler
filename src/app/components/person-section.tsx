@@ -5,6 +5,7 @@ import style from '../styles/person-section.module.scss';
 import dropDownArrow from '../../../public/assets/img/drop-down-arrow.svg'
 import dropDownArrowOpen from '../../../public/assets/img/drop-down-arrow-open.svg';
 import { Developer } from '../lib/types';
+import DeveloperStoriesList from './developer-stories-list';
 
 interface PersonSectionProps {
     developer: Developer;
@@ -12,7 +13,6 @@ interface PersonSectionProps {
 
 function PersonSection({ developer }: PersonSectionProps) {
   const [dropDownOpen, setDropDownOpen] = useState<boolean>(false);
-  
   const fullName = developer.first_name + ' ' + developer.last_name;
 
   return (
@@ -32,7 +32,7 @@ function PersonSection({ developer }: PersonSectionProps) {
       </div>
       { dropDownOpen && 
         <div>
-          <p>{developer.position}</p>
+          <DeveloperStoriesList stories={developer.stories}/>
         </div>
       }
     </>

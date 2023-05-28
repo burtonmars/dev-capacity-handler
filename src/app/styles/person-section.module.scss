@@ -3,10 +3,11 @@
     align-items: center;
     column-gap: 1rem;
     padding-left: 1rem;
-    height: 8vh;
+    height: var(--height-section-line);
     border-style: solid none;
     border-width: 2px;
     border-color: #ffffff;
+    cursor: pointer;
 
     h1 {
         font-size: 1.4rem;

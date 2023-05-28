@@ -6,7 +6,7 @@ function SubHeader() {
   return (
     <div className={style.subheader__container}>
       <button>+ NEW STORY</button>
-      <p>ASSIGNEE</p>
+      <p>STORY POINTS</p>
     </div>
   )
 };

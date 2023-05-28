@@ -4,17 +4,25 @@ import Image from 'next/image';
 import style from '../styles/story-section.module.scss';
 import dropDownArrow from '../../../public/assets/img/drop-down-arrow.svg'
 import dropDownArrowOpen from '../../../public/assets/img/drop-down-arrow-open.svg';
+import { Story } from '../lib/types';
+import StoriesList from './stories-list';
 
-interface StorySectionProps {
+interface Section {
     title: string;
+    stories: Story[];
 }
 
-function StorySection({ title }: StorySectionProps) {
+interface StorySectionProps {
+    section: Section;
+}
+
+function StorySection({ section }: StorySectionProps) {
   const [dropDownOpen, setDropDownOpen] = useState<boolean>(false);
 
   return (
-    <div className={style.storySection__container}>
-        <div onClick={() => setDropDownOpen(!dropDownOpen)}>
+    <>
+    <div className={style.storySection__container} onClick={() => setDropDownOpen(!dropDownOpen)}>
+        <div>
             { dropDownOpen && <Image 
             className={style.storySection__dropDownArrow}
             src={dropDownArrow}
@@ -23,10 +31,12 @@ function StorySection({ title }: StorySectionProps) {
             className={style.storySection__dropDownArrow}
             src={dropDownArrowOpen}
             alt='drop-down arrow open'
-            height={25}/> }
+            height={25}/> }  
         </div>
-        <h1>{title}</h1>
-    </div>
+        <h1>{section.title}</h1>
+      </div>
+      {dropDownOpen && <StoriesList stories={section.stories}/>}
+    </>
   )
 };
 

@@ -1,10 +1,12 @@
 import { ObjectId } from 'mongodb'
 
-export type Ticket = {
-  id: number
+export type Story = {
+  _id: number
   title: string
   description: string
   status: string
+  points: number
+  developer: string
 }
 
 export type Developer = {
@@ -14,5 +16,5 @@ export type Developer = {
   position: string
   level: string
   color: string
-  tickets: [Ticket]
+  stories: [Story]
 }
