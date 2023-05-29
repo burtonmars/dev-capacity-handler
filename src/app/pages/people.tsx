@@ -9,12 +9,12 @@ interface PeopleProps {
     developers: Developer[];
 }
 
-function People({ developers }: PeopleProps ) { 
+function People({ developers }: PeopleProps ) {
   return (
     <div className={style.people__mainContainer}>
-        <SubHeader />
+        <SubHeader developers={developers}/>
         {developers.map((developer: Developer) => (
-            <div key={developer._id} className={style.stories__section}>
+            <div key={developer._id} className={style.people__section}>
                 <PersonSection developer={developer}/>
             </div>
         ))}

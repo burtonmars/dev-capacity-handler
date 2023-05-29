@@ -1,0 +1,48 @@
+.listStories__container {
+    ul {
+            list-style-type: none;
+        }
+
+    .listStories__storyContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: var(--height-section-line);
+        padding: 0 1rem;
+        background-color: #fff;
+        border-style: solid none;
+        border-width: 2px;
+        border-color: var(--color-background);
+        cursor: pointer;
+
+        .listStories__title {
+            font-size: 1.2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 80%;
+        }
+
+        .listStories__developerColorIcon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-color: red;
+        }
+
+        .listStories__points {
+            font-size: 1.2rem;
+        }
+    }
+
+    .listStories__noStories {
+        height: 4vh;
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+    }
+}

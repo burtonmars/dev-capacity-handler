@@ -18,3 +18,9 @@ export type Developer = {
   color: string
   stories: [Story]
 }
+
+export type Section = {
+  title: string
+  tag: string
+  stories: Story[]
+}

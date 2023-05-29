@@ -4,7 +4,6 @@ import { useState } from 'react';
 import style from './styles/page.module.scss';
 
 import { getDevelopers } from '../app/lib/developers';
-import { Developer } from './lib/types';
 import Home from './pages/home';
 
 async function fetchDevelopers() {

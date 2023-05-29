@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import style from '../styles/stories.module.scss';
 import SubHeader from '../components/subheader';
@@ -40,22 +40,35 @@ const sections: Section[] = [
 ];
 
 function assignStoriesToSections(developers: Developer[]) {
-    developers.forEach((developer: Developer) => {
-        developer.stories.forEach((story) => {
-            const section = sections.find((section) => section.tag === story.status);
-            if (section) {
-                section.stories.push(story);
-            }
-        })
-    })
+  const updatedSections: Section[] = sections.map((section) => ({
+    ...section,
+    stories: [],
+  }));
+
+  developers.forEach((developer: Developer) => {
+    developer.stories.forEach((story) => {
+      const section = updatedSections.find((section) => section.tag === story.status);
+      if (section) {
+        section.stories.push(story);
+      }
+    });
+  });
+
+  return updatedSections;
 }
 
 function Stories({ developers }: StoriesProps ) {
-  assignStoriesToSections(developers);
+  const [sectionsData, setSectionsData] = useState<Section[]>([]);
+
+  useEffect(() => {
+    const updatedSections = assignStoriesToSections(developers);
+    setSectionsData(updatedSections);
+  }, [developers]);
+
   return (
     <div className={style.stories__mainContainer}>
-        <SubHeader />
-        {sections.map((section, index) => (
+        <SubHeader developers={developers}/>
+        {sectionsData.map((section, index) => (
             <div key={index} className={style.stories__section}>
                 <StorySection section={section}/>
             </div>

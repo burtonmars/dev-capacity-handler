@@ -1,0 +1,30 @@
+.developerStories__container {
+    ul {
+        list-style-type: none;
+    }
+
+    .developerStories__storyContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: var(--height-section-line);
+        padding: 0 1rem;
+        background-color: #fff;
+        border-style: solid none;
+        border-width: 2px;
+        border-color: var(--color-background);
+        cursor: pointer;
+
+        .developerStories__title {
+            font-size: 1.2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 85%;
+        }
+
+        .developerStories__points {
+            font-size: 1.2rem;
+        }
+    }
+}

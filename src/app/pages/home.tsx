@@ -17,9 +17,11 @@ function Home({ developers }: homeProps ) {
   return (
     <div className={style.home__container}>
         <Header />
-        <Navbar key={activeTab} activeTab={activeTab} setActiveTab={setActiveTab} />
+        <div className={style.home__navbarContainer}>
+          <Navbar key={activeTab} activeTab={activeTab} setActiveTab={setActiveTab} />
             {activeTab === 'stories' && <Stories developers={developers} />}
             {activeTab === 'people' && <People developers={developers}/>}
+        </div>
     </div>
   )
 }

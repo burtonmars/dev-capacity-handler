@@ -1,0 +1,9 @@
+.home__navbarContainer {
+    max-width: 800px;
+}
+
+@media (min-width: 768px) {
+    .home__navbarContainer {
+        margin: 0 auto;
+    }
+}

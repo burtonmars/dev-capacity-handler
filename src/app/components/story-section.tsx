@@ -26,7 +26,8 @@ function StorySection({ section }: StorySectionProps) {
             { dropDownOpen && <Image 
             className={style.storySection__dropDownArrow}
             src={dropDownArrow}
-            alt='drop-down arrow closed'/> }
+            alt='drop-down arrow closed'
+            height={25}/> }
             { !dropDownOpen && <Image
             className={style.storySection__dropDownArrow}
             src={dropDownArrowOpen}
