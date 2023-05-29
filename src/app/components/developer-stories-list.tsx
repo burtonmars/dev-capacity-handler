@@ -10,6 +10,7 @@ interface DeveloperStoriesListProps {
 function DeveloperStoriesList({ stories }: DeveloperStoriesListProps ) {
   return (
     <div className={style.developerStories__container}>
+      {stories.length > 0 ? (
       <ul>
         {stories.map((story: Story, index: number) => (
           <li key={index}>
@@ -23,7 +24,10 @@ function DeveloperStoriesList({ stories }: DeveloperStoriesListProps ) {
             </div>
           </li>
         ))}
-      </ul>
+      </ul>) : (
+        <div className={style.developerStories__noStories}>
+          No Stories
+        </div>)}
     </div>
   )
 };

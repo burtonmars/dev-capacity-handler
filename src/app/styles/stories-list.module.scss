@@ -15,6 +15,14 @@
         border-color: var(--color-background);
         cursor: pointer;
 
+        .listStories__developerAndStoryPointsContainer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 15vw;
+            max-width: 100px;
+        }
+
         .listStories__title {
             font-size: 1.2rem;
             white-space: nowrap;
@@ -44,5 +52,30 @@
         display: flex;
         align-items: center;
         padding: 0 1rem;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .listStories__container {
+        .listStories__storyContainer {
+            height: 5vh;
+
+            .listStories__title {
+                font-size: 1rem;
+            }
+
+            .listStories__developerColorIcon {
+                width: 2rem;
+                height: 2rem;
+            }
+
+            .listStories__points {
+                font-size: 1rem;
+            }
+        }
+
+        .listStories__noStories {
+            height: 5vh;
+        }
     }
 }

@@ -49,8 +49,8 @@ function SubHeader({ developers }: SubheaderProps) {
 
   return (
     <div className={style.subheader__container}>
-      <button onClick={handleButtonClick}>+ NEW STORY</button>
-      <p>STORY POINTS</p>
+      <button className={style.subheader__newStoryButton} onClick={handleButtonClick}>+ NEW STORY</button>
+      <p className={style.subheader__storyPointsLabel}>STORY POINTS</p>
 
       {showPopup && (
         <div className={style.dialogOverlay}>

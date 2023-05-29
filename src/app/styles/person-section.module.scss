@@ -18,3 +18,13 @@
         display: flex;
     }
 }
+
+@media screen and (min-width: 800px) {
+    .personSection__container {
+            height: 5vh;
+    
+            h1 {
+                font-size: 1rem;
+            }
+        }
+}

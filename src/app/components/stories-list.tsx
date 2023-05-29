@@ -19,12 +19,14 @@ function StoriesList({ stories }: StoriesListProps ) {
               <div className={style.listStories__title}>
                 {story.title}
               </div>
-              <div className={style.listStories__developerColorIcon}>
+              <div className={style.listStories__developerAndStoryPointsContainer}>
+                <div className={style.listStories__developerColorIcon}>
                   {/* TODO: figure out how to pull dev from story to get initials */}
                   SC
-              </div>
-              <div className={style.listStories__points}>
-                {story.points}
+                </div>
+                <div className={style.listStories__points}>
+                  {story.points}
+                </div>
               </div>
             </div>
           </li>

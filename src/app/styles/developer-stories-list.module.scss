@@ -27,4 +27,27 @@
             font-size: 1.2rem;
         }
     }
+
+    .developerStories__noStories {
+        height: 4vh;
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .developerStories__container {
+        .developerStories__storyContainer {
+            height: 5vh;
+
+            .developerStories__title {
+                font-size: 1rem;
+            }
+        }
+
+        .developerStories__noStories {
+            height: 5vh;
+        }
+    }
 }
