@@ -28,3 +28,21 @@ export async function getDevelopers() {
     return { error: 'Failed to fetch developers' }
   }
 }
+
+export async function getDeveloperById(developerId) {
+  try {
+    if (!developers) await init()
+
+    const objectId = ObjectId.createFromHexString(developerId)
+    console.log(objectId)
+
+    const result = await developer
+      .find({ where: { _id: objectId } })
+      .map((developer) => ({ ...developer, _id: developer._id.toString() }))
+      .toArray()
+
+    return { developer: result }
+  } catch (error) {
+    return { error: 'Failed to fetch developers' }
+  }
+}

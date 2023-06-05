@@ -1,0 +1,44 @@
+.storyTab__storyContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--height-section-line);
+    padding: 0 1rem;
+    background-color: #fff;
+    border-style: solid none;
+    border-width: 2px;
+    border-color: var(--color-background);
+    cursor: pointer;
+
+    .storyTab__developerAndStoryPointsContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 15vw;
+        max-width: 100px;
+    }
+
+    .storyTab__title {
+        font-size: 1.2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 80%;
+    }
+
+    .storyTab__developerColorIcon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        // background-color: aqua;
+        background-color: var(--dev-color);
+    }
+
+    .storyTab__points {
+        font-size: 1.2rem;
+    }
+}

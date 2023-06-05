@@ -3,13 +3,14 @@ import React from 'react';
 import style from '../styles/people.module.scss';
 import SubHeader from '../components/subheader';
 import PersonSection from '../components/person-section';
-import { Developer } from '../lib/types';
+import { Developer, Story } from '../lib/types';
 
 interface PeopleProps {
     developers: Developer[];
+    stories: Story[];
 }
 
-function People({ developers }: PeopleProps ) {
+function People({ developers, stories }: PeopleProps ) {
   return (
     <div className={style.people__mainContainer}>
         <SubHeader developers={developers}/>

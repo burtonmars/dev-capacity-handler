@@ -13,7 +13,8 @@ interface Section {
 }
 
 interface StoriesProps {
-    developers: Developer[];
+  developers: Developer[];
+  stories: Story[];
 }
 
 const sections: Section[] = [
@@ -39,38 +40,36 @@ const sections: Section[] = [
     }
 ];
 
-function assignStoriesToSections(developers: Developer[]) {
+function assignStoriesToSections(stories: Story[]) {
   const updatedSections: Section[] = sections.map((section) => ({
     ...section,
     stories: [],
   }));
 
-  developers.forEach((developer: Developer) => {
-    developer.stories.forEach((story) => {
-      const section = updatedSections.find((section) => section.tag === story.status);
-      if (section) {
-        section.stories.push(story);
-      }
-    });
+  stories.forEach((story) => {
+    const section = updatedSections.find((section) => section.tag === story.status);
+    if (section) {
+      section.stories.push(story);
+    }
   });
 
   return updatedSections;
 }
 
-function Stories({ developers }: StoriesProps ) {
+function Stories({ developers, stories }: StoriesProps ) {
   const [sectionsData, setSectionsData] = useState<Section[]>([]);
 
   useEffect(() => {
-    const updatedSections = assignStoriesToSections(developers);
+    const updatedSections = assignStoriesToSections(stories);
     setSectionsData(updatedSections);
-  }, [developers]);
+  }, [stories]);
 
   return (
     <div className={style.stories__mainContainer}>
         <SubHeader developers={developers}/>
         {sectionsData.map((section, index) => (
             <div key={index} className={style.stories__section}>
-                <StorySection section={section}/>
+                <StorySection section={section} developers={developers}/>
             </div>
         ))}
     </div>

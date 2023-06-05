@@ -4,7 +4,7 @@ import Image from 'next/image';
 import style from '../styles/story-section.module.scss';
 import dropDownArrow from '../../../public/assets/img/drop-down-arrow.svg'
 import dropDownArrowOpen from '../../../public/assets/img/drop-down-arrow-open.svg';
-import { Story } from '../lib/types';
+import { Developer, Story } from '../lib/types';
 import StoriesList from './stories-list';
 
 interface Section {
@@ -14,9 +14,10 @@ interface Section {
 
 interface StorySectionProps {
     section: Section;
+    developers: Developer[];
 }
 
-function StorySection({ section }: StorySectionProps) {
+function StorySection({ section, developers }: StorySectionProps) {
   const [dropDownOpen, setDropDownOpen] = useState<boolean>(false);
 
   return (
@@ -36,7 +37,7 @@ function StorySection({ section }: StorySectionProps) {
         </div>
         <h1>{section.title}</h1>
       </div>
-      {dropDownOpen && <StoriesList stories={section.stories}/>}
+      {dropDownOpen && <StoriesList stories={section.stories} developers={developers}/>}
     </>
   )
 };

@@ -1,11 +1,11 @@
 import { ObjectId } from 'mongodb'
 
 export type Story = {
-  _id: number
+  _id: string
   title: string
   description: string
   status: string
-  points: number
+  story_points: number
   developer: string
 }
 
@@ -23,4 +23,10 @@ export type Section = {
   title: string
   tag: string
   stories: Story[]
+}
+
+export type DeveloperInfo = {
+  storyId: string
+  color: string
+  developerInitials: string
 }

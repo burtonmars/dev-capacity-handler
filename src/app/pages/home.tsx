@@ -7,11 +7,14 @@ import People from './people';
 import Navbar from '../components/navbar';
 import Header from '../components/header';
 
+import { Developer, Story } from '../lib/types';
+
 interface homeProps {
-    developers: any;
+    developers: Developer[];
+    stories: Story[];
 }
 
-function Home({ developers }: homeProps ) {
+function Home({ developers, stories }: homeProps ) {
   const [activeTab, setActiveTab] = useState<string | null>('stories');
 
   return (
@@ -19,8 +22,8 @@ function Home({ developers }: homeProps ) {
         <Header />
         <div className={style.home__navbarContainer}>
           <Navbar key={activeTab} activeTab={activeTab} setActiveTab={setActiveTab} />
-            {activeTab === 'stories' && <Stories developers={developers} />}
-            {activeTab === 'people' && <People developers={developers}/>}
+            {activeTab === 'stories' && <Stories developers={developers} stories={stories} />}
+            {activeTab === 'people' && <People developers={developers} stories={stories}/>}
         </div>
     </div>
   )

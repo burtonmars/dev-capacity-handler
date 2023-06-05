@@ -1,12 +1,11 @@
-import { getDevelopers } from '../../../src/app/lib/developers'
-import { getDeveloperById } from '../../../src/app/lib/developers'
+import { getStories } from '../../../src/app/lib/stories'
 
 const handler = async (req, res) => {
   if (req.method === 'GET') {
     try {
-      const { developers, error } = await getDevelopers()
+      const { stories, error } = await getStories()
       if (error) throw new Error(error)
-      return res.status(200).json({ developers })
+      return res.status(200).json({ stories })
     } catch (error) {
       return res.status(500).json({ error })
     }
