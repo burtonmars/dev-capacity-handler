@@ -28,3 +28,13 @@ export async function getStories() {
     return { error: 'Failed to fetch stories' }
   }
 }
+
+export async function addNewStory(newStory) {
+  try {
+    if (!stories) await init()
+    const result = await stories.insertOne(newStory)
+    return { success: true, insertedId: result.insertedId }
+  } catch (error) {
+    return { success: false, error: 'Failed to save the story' }
+  }
+}

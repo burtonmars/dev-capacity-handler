@@ -4,6 +4,7 @@ import Image from 'next/image';
 import style from '../styles/subheader.module.scss';
 import closeWindow from '../../../public/assets/img/close-window.webp'
 import { Developer } from '../lib/types';
+import { addNewStory } from '../../app/lib/stories';
 
 interface SubheaderProps {
     developers: Developer[];
