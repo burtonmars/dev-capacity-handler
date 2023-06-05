@@ -4,16 +4,18 @@ import Image from 'next/image';
 import style from '../styles/person-section.module.scss';
 import dropDownArrow from '../../../public/assets/img/drop-down-arrow.svg'
 import dropDownArrowOpen from '../../../public/assets/img/drop-down-arrow-open.svg';
-import { Developer } from '../lib/types';
+import { Developer, Story } from '../lib/types';
 import DeveloperStoriesList from './developer-stories-list';
 
 interface PersonSectionProps {
     developer: Developer;
+    stories: Story[];
 }
 
-function PersonSection({ developer }: PersonSectionProps) {
+function PersonSection({ developer, stories }: PersonSectionProps) {
   const [dropDownOpen, setDropDownOpen] = useState<boolean>(false);
   const fullName = developer.first_name + ' ' + developer.last_name;
+  const developerStories = stories.filter(story => story.developer === developer._id);
 
   return (
     <>
@@ -32,7 +34,7 @@ function PersonSection({ developer }: PersonSectionProps) {
       </div>
       { dropDownOpen && 
         <div>
-          <DeveloperStoriesList stories={developer.stories}/>
+          <DeveloperStoriesList stories={developerStories}/>
         </div>
       }
     </>

@@ -19,7 +19,7 @@ function DeveloperStoriesList({ stories }: DeveloperStoriesListProps ) {
                 {story.title}
               </div>
               <div className={style.developerStories__points}>
-                {story.points}
+                {story.story_points}
               </div>
             </div>
           </li>

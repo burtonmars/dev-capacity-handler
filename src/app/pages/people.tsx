@@ -16,7 +16,7 @@ function People({ developers, stories }: PeopleProps ) {
         <SubHeader developers={developers}/>
         {developers.map((developer: Developer) => (
             <div key={developer._id} className={style.people__section}>
-                <PersonSection developer={developer}/>
+                <PersonSection developer={developer} stories={stories}/>
             </div>
         ))}
     </div>
