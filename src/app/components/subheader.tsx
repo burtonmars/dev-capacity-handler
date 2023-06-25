@@ -31,7 +31,7 @@ function SubHeader({ developers }: SubheaderProps) {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    // Handle form submission, e.g., send data to server
+    // TODO: Handle form submission, e.g., send data to server
     console.log('Form values:', formValues);
     // Reset form values
     setFormValues({
@@ -40,7 +40,6 @@ function SubHeader({ developers }: SubheaderProps) {
       assignee: '',
       points: '',
     });
-    // Close the dialog box
     setShowPopup(false);
   };
 
