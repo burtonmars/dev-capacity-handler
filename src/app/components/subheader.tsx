@@ -29,10 +29,11 @@ function SubHeader({ developers }: SubheaderProps) {
     }));
   };
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit =  (event: any) => {
     event.preventDefault();
-    const response = await addNewStory(formValues);
-    console.log(formValues);
+    // TODO: write the form values to the db
+    //const response = addNewStory(formValues);
+    console.log('form values: ' + formValues);
     setFormValues({
       title: '',
       description: '',
