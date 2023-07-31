@@ -17,7 +17,6 @@ function StoriesList({ stories, developers }: StoriesListProps ) {
       {stories.length > 0 ?
       (<ul>
         {stories.map((story: Story, index: number) => (
-          //TODO: once Story IDs are working correctly, use those instead of index
           <li key={story._id}>
             <StoryTab story={story} developerInfo={storyTabDeveloperInfo.filter((info) => {
               return info.storyId === story._id;

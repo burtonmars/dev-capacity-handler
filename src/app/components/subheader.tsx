@@ -29,11 +29,10 @@ function SubHeader({ developers }: SubheaderProps) {
     }));
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
-    // TODO: Handle form submission, e.g., send data to server
-    console.log('Form values:', formValues);
-    // Reset form values
+    const response = await addNewStory(formValues);
+    console.log(formValues);
     setFormValues({
       title: '',
       description: '',
