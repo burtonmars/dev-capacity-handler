@@ -23,7 +23,7 @@ function StoryTab({ story, developerInfo }: StoryTabProps) {
             </div>
         </div>
     </div>
-    )
-}
+    );
+};
 
-export default StoryTab
+export default StoryTab;

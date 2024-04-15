@@ -66,7 +66,7 @@ function Stories({ developers, stories }: StoriesProps ) {
 
   return (
     <div className={style.stories__mainContainer}>
-        <SubHeader developers={developers}/>
+        <SubHeader developers={developers} tabTitle={'stories'}/>
         {sectionsData.map((section, index) => (
             <div key={index} className={style.stories__section}>
                 <StorySection section={section} developers={developers}/>

@@ -13,7 +13,7 @@ interface PeopleProps {
 function People({ developers, stories }: PeopleProps ) {
   return (
     <div className={style.people__mainContainer}>
-        <SubHeader developers={developers}/>
+        <SubHeader developers={developers} tabTitle={'people'}/>
         {developers.map((developer: Developer) => (
             <div key={developer._id} className={style.people__section}>
                 <PersonSection developer={developer} stories={stories}/>
