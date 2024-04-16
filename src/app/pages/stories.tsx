@@ -9,12 +9,13 @@ import { statusBuckets } from '../lib/enums';
 interface Section {
     title: string;
     tag: string;
-    stories: Story[]
+    stories: Story[];
 }
 
 interface StoriesProps {
   developers: Developer[];
   stories: Story[];
+  refetchStories: () => void;
 }
 
 const sections: Section[] = [
@@ -56,7 +57,7 @@ function assignStoriesToSections(stories: Story[]) {
   return updatedSections;
 }
 
-function Stories({ developers, stories }: StoriesProps ) {
+function Stories({ developers, stories, refetchStories }: StoriesProps ) {
   const [sectionsData, setSectionsData] = useState<Section[]>([]);
 
   useEffect(() => {
@@ -66,7 +67,7 @@ function Stories({ developers, stories }: StoriesProps ) {
 
   return (
     <div className={style.stories__mainContainer}>
-        <SubHeader developers={developers} tabTitle={'stories'}/>
+        <SubHeader developers={developers} tabTitle={'stories'} refetchStories={refetchStories}/>
         {sectionsData.map((section, index) => (
             <div key={index} className={style.stories__section}>
                 <StorySection section={section} developers={developers}/>

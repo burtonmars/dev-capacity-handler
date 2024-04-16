@@ -4,19 +4,26 @@ import Image from 'next/image';
 import closeWindow from '../../../public/assets/img/close-window.webp'
 import style from '../styles/add-story-dialog.module.scss';
 import { fibonacciNumbers } from '../lib/data';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
+import { Story } from '../lib/types';
 
 interface AddStoryDialogProps {
   developers: any[];
+  refetchStories: () => void;
 }
 
-function AddStoryDialog({ developers }: AddStoryDialogProps) {
+function AddStoryDialog({ developers, refetchStories }: AddStoryDialogProps) {
   const [showPopup, setShowPopup] = useState(false);
   const [formValues, setFormValues] = useState({
     title: '',
     description: '',
-    assignee: '',
-    points: '',
+    status: 'backlog',
+    story_points: '',
+    developer: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
@@ -26,18 +33,41 @@ function AddStoryDialog({ developers }: AddStoryDialogProps) {
     }));
   };
 
-  const handleSubmit =  (event: any) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // TODO: write the form values to the db
-    //const response = addNewStory(formValues);
-    setFormValues({
-      title: '',
-      description: '',
-      assignee: '',
-      points: '',
-    });
-    setShowPopup(false);
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/stories', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formValues),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to save the story');
+      }
+
+      setFormValues({
+        title: '',
+        description: '',
+        status: '',
+        story_points: '',
+        developer: '',
+      });
+      setShowPopup(false);
+    } catch (error: any) {
+      setError(error.message);
+    } finally {
+      setIsSubmitting(false);
+      refetchStories();
+    }
   };
+
 
   const handleButtonClick = () => {
     setShowPopup(true);
@@ -60,6 +90,7 @@ function AddStoryDialog({ developers }: AddStoryDialogProps) {
                   </Image>
                 </button>
               </div>
+              {error && <p className={style.errorMessage}>{error}</p>}
               <label htmlFor="title">Title:</label>
               <input type="text" id="title" name="title" value={formValues.title} onChange={handleInputChange} />
 
@@ -68,8 +99,8 @@ function AddStoryDialog({ developers }: AddStoryDialogProps) {
 
               <div className={style.addStoryDialog__dialogueDropDowns}>
                 <div className={style.addStoryDialog__dialogueDropDownLeft}>
-                  <label htmlFor="assignee">Assignee:</label>
-                  <select id="assignee" name="assignee" value={formValues.assignee} onChange={handleInputChange}>
+                  <label htmlFor="developer">Assignee:</label>
+                  <select id="developer" name="developer" value={formValues.developer} onChange={handleInputChange}>
                     <option value="">Select Assignee</option>
                       {developers.map((developer) => (
                         <option key={developer._id} value={developer._id}>
@@ -79,8 +110,8 @@ function AddStoryDialog({ developers }: AddStoryDialogProps) {
                   </select>
                 </div>
                 <div className={style.addStoryDialog__dialogueDropDownRight}>
-                  <label htmlFor="points">Story Points:</label>
-                  <select id="points" name="points" value={formValues.points} onChange={handleInputChange}>
+                  <label htmlFor="story_points">Story Points:</label>
+                  <select id="story_points" name="story_points" value={formValues.story_points} onChange={handleInputChange}>
                     <option value="">Select Points</option>
                     {fibonacciNumbers.map((number) => (
                       <option key={number} value={number}>
@@ -92,7 +123,9 @@ function AddStoryDialog({ developers }: AddStoryDialogProps) {
               </div>
 
               <div className={style.dialogActions}>
-                <button type="submit">Save</button>
+                <button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? 'Saving...' : 'Save'}
+                </button>
               </div>
             </form>
           </div>

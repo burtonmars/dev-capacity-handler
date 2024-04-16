@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 
 import style from '../styles/subheader.module.scss';
-import { Developer } from '../lib/types';
+import { Developer, Story } from '../lib/types';
 import AddStoryDialog from './add_story_dialog';
 interface SubheaderProps {
     developers: Developer[];
     tabTitle: string;
+    refetchStories: () => void;
 }
 
-function SubHeader({ developers, tabTitle }: SubheaderProps) {
+function SubHeader({ developers, tabTitle, refetchStories }: SubheaderProps) {
   return (
     <div className={style.subheader__container}>
       <div>
-        {tabTitle === 'stories' && <AddStoryDialog developers={developers}/>}
+        {tabTitle === 'stories' && <AddStoryDialog developers={developers} refetchStories={refetchStories}/>}
       </div>
       <div className={style.subheader__storyPointsLabel}>STORY POINTS</div>
     </div>

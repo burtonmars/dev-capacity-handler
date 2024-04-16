@@ -8,12 +8,13 @@ import { Developer, Story } from '../lib/types';
 interface PeopleProps {
     developers: Developer[];
     stories: Story[];
+    refetchStories: () => void;
 }
 
-function People({ developers, stories }: PeopleProps ) {
+function People({ developers, stories, refetchStories }: PeopleProps ) {
   return (
     <div className={style.people__mainContainer}>
-        <SubHeader developers={developers} tabTitle={'people'}/>
+        <SubHeader developers={developers} tabTitle={'people'} refetchStories={refetchStories}/>
         {developers.map((developer: Developer) => (
             <div key={developer._id} className={style.people__section}>
                 <PersonSection developer={developer} stories={stories} developers={developers}/>
