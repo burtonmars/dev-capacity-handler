@@ -7,9 +7,10 @@ import EditStoryDialog from './edit-story-dialog';
 interface DeveloperStoriesListProps {
     stories: Story[];
     developers: Developer[];
+    refetchStories: () => void;
 }
 
-function DeveloperStoriesList({ stories, developers }: DeveloperStoriesListProps ) {
+function DeveloperStoriesList({ stories, developers, refetchStories }: DeveloperStoriesListProps ) {
   const [showPopup, setShowPopup] = useState(false);
 
   const handleButtonClick = () => {
@@ -31,7 +32,7 @@ function DeveloperStoriesList({ stories, developers }: DeveloperStoriesListProps
               </div>
             </div>
             {showPopup && (
-              <EditStoryDialog developers={developers} story={story} setShowPopup={setShowPopup}/>
+              <EditStoryDialog developers={developers} story={story} setShowPopup={setShowPopup} refetchStories={refetchStories}/>
             )}
           </li>
         ))}
