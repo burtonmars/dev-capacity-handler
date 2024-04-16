@@ -9,10 +9,11 @@ import DeveloperStoriesList from './developer-stories-list';
 
 interface PersonSectionProps {
     developer: Developer;
+    developers: Developer[];
     stories: Story[];
 }
 
-function PersonSection({ developer, stories }: PersonSectionProps) {
+function PersonSection({ developer, stories, developers }: PersonSectionProps) {
   const [dropDownOpen, setDropDownOpen] = useState<boolean>(false);
   const fullName = developer.first_name + ' ' + developer.last_name;
   const developerStories = stories.filter(story => story.developer === developer._id);
@@ -34,7 +35,7 @@ function PersonSection({ developer, stories }: PersonSectionProps) {
       </div>
       { dropDownOpen && 
         <div>
-          <DeveloperStoriesList stories={developerStories}/>
+          <DeveloperStoriesList stories={developerStories} developers={developers}/>
         </div>
       }
     </>

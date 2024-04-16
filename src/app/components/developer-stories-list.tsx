@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import style from '../styles/developer-stories-list.module.scss';
-import { Story } from '../lib/types';
+import { Developer, Story } from '../lib/types';
+import EditStoryDialog from './edit-story-dialog';
 
 interface DeveloperStoriesListProps {
     stories: Story[];
+    developers: Developer[];
 }
 
-function DeveloperStoriesList({ stories }: DeveloperStoriesListProps ) {
+function DeveloperStoriesList({ stories, developers }: DeveloperStoriesListProps ) {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleButtonClick = () => {
+      setShowPopup(true);
+  };
+
   return (
     <div className={style.developerStories__container}>
       {stories.length > 0 ? (
       <ul>
         {stories.map((story: Story, index: number) => (
           <li key={index}>
-            <div className={style.developerStories__storyContainer}>
+            <div className={style.developerStories__storyContainer} onClick={handleButtonClick}>
               <div className={style.developerStories__title}>
                 {story.title}
               </div>
@@ -22,6 +30,9 @@ function DeveloperStoriesList({ stories }: DeveloperStoriesListProps ) {
                 {story.story_points}
               </div>
             </div>
+            {showPopup && (
+              <EditStoryDialog developers={developers} story={story} setShowPopup={setShowPopup}/>
+            )}
           </li>
         ))}
       </ul>) : (

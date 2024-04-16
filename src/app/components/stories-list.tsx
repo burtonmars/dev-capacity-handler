@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import style from '../styles/stories-list.module.scss';
 import { Developer, DeveloperInfo, Story } from '../lib/types';
 import StoryTab from './story-tab';
+import EditStoryDialog from './edit-story-dialog';
 
 interface StoriesListProps {
   stories: Story[];
@@ -13,22 +14,24 @@ function StoriesList({ stories, developers }: StoriesListProps ) {
   const storyTabDeveloperInfo = getStoryTabDevAndIcon(developers, stories);
 
   return (
-    <div className={style.listStories__container}>
-      {stories.length > 0 ?
-      (<ul>
-        {stories.map((story: Story, index: number) => (
-          <li key={story._id}>
-            <StoryTab story={story} developerInfo={storyTabDeveloperInfo.filter((info) => {
-              return info.storyId === story._id;
-            })}/>
-          </li>
-        ))}
-      </ul>
-      ) : (
-        <div className={style.listStories__noStories}>
-          No Stories
-        </div>)}
-    </div>
+    <>
+      <div className={style.listStories__container}>
+        {stories.length > 0 ?
+        (<ul>
+          {stories.map((story: Story, index: number) => (
+            <li key={story._id}>
+              <StoryTab story={story} developerInfo={storyTabDeveloperInfo.filter((info) => {
+                return info.storyId === story._id;
+              })}  developers={developers}/>
+            </li>
+          ))}
+        </ul>
+        ) : (
+          <div className={style.listStories__noStories}>
+            No Stories
+          </div>)}
+      </div>
+    </>
   )
 };
 

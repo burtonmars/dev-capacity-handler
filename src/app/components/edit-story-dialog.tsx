@@ -1,21 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import Image from 'next/image';
 
+import style from '../styles/edit-story-dialog.module.scss';
 import closeWindow from '../../../public/assets/img/close-window.webp'
-import style from '../styles/add-story-dialog.module.scss';
 import { fibonacciNumbers } from '../lib/data';
+import { Developer, Story } from '../lib/types';
 
-interface AddStoryDialogProps {
-  developers: any[];
+interface EditStoryDialogProps {
+  developers: Developer[];
+  story: Story;
+  setShowPopup: (showPopup: boolean) => void;
 }
 
-function AddStoryDialog({ developers }: AddStoryDialogProps) {
-  const [showPopup, setShowPopup] = useState(false);
+const EditStoryDialog = ({ developers, story, setShowPopup }: EditStoryDialogProps ) => {
   const [formValues, setFormValues] = useState({
-    title: '',
-    description: '',
-    assignee: '',
-    points: '',
+    title: story.title,
+    description: story.description,
+    assignee: story.developer,
+    points: story.story_points,
   });
 
   const handleInputChange = (event: any) => {
@@ -34,24 +36,17 @@ function AddStoryDialog({ developers }: AddStoryDialogProps) {
       title: '',
       description: '',
       assignee: '',
-      points: '',
+      points: 0,
     });
     setShowPopup(false);
   };
 
-  const handleButtonClick = () => {
-    setShowPopup(true);
-  };
-
   return (
-    <div className={style.addStoryDialog__container}>
-      <button className={style.addStoryDialog__newStoryButton} onClick={handleButtonClick}>+ NEW STORY</button>
-
-      {showPopup && (
+    <div className={style.editStoryDialog__container}>
         <div className={style.dialogOverlay}>
           <div className={style.dialogBox}>
             <form onSubmit={handleSubmit}>
-              <div className={style.addStoryDialog__cancelButton}>
+              <div className={style.editStoryDialog__cancelButton}>
                 <button type="button" onClick={() => setShowPopup(false)}>
                   <Image 
                     src={closeWindow}
@@ -66,8 +61,8 @@ function AddStoryDialog({ developers }: AddStoryDialogProps) {
               <label htmlFor="description">Description:</label>
               <textarea id="description" name="description" value={formValues.description} onChange={handleInputChange}></textarea>
 
-              <div className={style.addStoryDialog__dialogueDropDowns}>
-                <div className={style.addStoryDialog__dialogueDropDownLeft}>
+              <div className={style.editStoryDialog__dialogueDropDowns}>
+                <div className={style.editStoryDialog__dialogueDropDownLeft}>
                   <label htmlFor="assignee">Assignee:</label>
                   <select id="assignee" name="assignee" value={formValues.assignee} onChange={handleInputChange}>
                     <option value="">Select Assignee</option>
@@ -78,7 +73,7 @@ function AddStoryDialog({ developers }: AddStoryDialogProps) {
                       ))}
                   </select>
                 </div>
-                <div className={style.addStoryDialog__dialogueDropDownRight}>
+                <div className={style.editStoryDialog__dialogueDropDownRight}>
                   <label htmlFor="points">Story Points:</label>
                   <select id="points" name="points" value={formValues.points} onChange={handleInputChange}>
                     <option value="">Select Points</option>
@@ -97,9 +92,8 @@ function AddStoryDialog({ developers }: AddStoryDialogProps) {
             </form>
           </div>
         </div>
-      )}
     </div>
   );
 };
 
-export default AddStoryDialog;
+export default EditStoryDialog;
