@@ -8,9 +8,10 @@ interface StoryTabProps {
     story: Story;
     developerInfo: DeveloperInfo[];
     developers: Developer[];
+    refetchStories: () => void;
 }
 
-function StoryTab({ story, developerInfo, developers }: StoryTabProps) {
+function StoryTab({ story, developerInfo, developers, refetchStories }: StoryTabProps) {
     const [showPopup, setShowPopup] = useState(false);
 
     const handleButtonClick = () => {
@@ -33,7 +34,7 @@ function StoryTab({ story, developerInfo, developers }: StoryTabProps) {
             </div>
         </div>
         {showPopup && (
-            <EditStoryDialog developers={developers} story={story} setShowPopup={setShowPopup}/>
+            <EditStoryDialog developers={developers} story={story} setShowPopup={setShowPopup} refetchStories={refetchStories}/>
         )}
     </>
     );

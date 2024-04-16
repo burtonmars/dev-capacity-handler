@@ -1,4 +1,5 @@
 import clientPromise from './mongodb'
+const { ObjectId } = require('mongodb')
 
 let client
 let db
@@ -36,5 +37,23 @@ export async function addNewStory(newStory) {
     return { success: true, insertedId: result.insertedId }
   } catch (error) {
     return { success: false, error: 'Failed to save the story' }
+  }
+}
+
+export async function updateStory(story) {
+  try {
+    if (!stories) await init()
+    const { _id, ...updateFields } = story
+    const result = await stories.updateOne(
+      { _id: ObjectId.createFromHexString(_id) },
+      { $set: updateFields }
+    )
+    if (result.matchedCount === 0) {
+      return { success: false, error: 'No matching story record found' }
+    }
+    return { success: true }
+  } catch (error) {
+    console.error('Update story error:', error)
+    return { success: false, error: 'Failed to update the story' }
   }
 }

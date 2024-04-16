@@ -8,9 +8,10 @@ import EditStoryDialog from './edit-story-dialog';
 interface StoriesListProps {
   stories: Story[];
   developers: Developer[];
+  refetchStories: () => void;
 }
 
-function StoriesList({ stories, developers }: StoriesListProps ) {
+function StoriesList({ stories, developers, refetchStories }: StoriesListProps ) {
   const storyTabDeveloperInfo = getStoryTabDevAndIcon(developers, stories);
 
   return (
@@ -22,7 +23,7 @@ function StoriesList({ stories, developers }: StoriesListProps ) {
             <li key={story._id}>
               <StoryTab story={story} developerInfo={storyTabDeveloperInfo.filter((info) => {
                 return info.storyId === story._id;
-              })}  developers={developers}/>
+              })}  developers={developers} refetchStories={refetchStories}/>
             </li>
           ))}
         </ul>

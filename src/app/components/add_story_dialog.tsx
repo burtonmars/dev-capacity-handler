@@ -18,7 +18,7 @@ function AddStoryDialog({ developers, refetchStories }: AddStoryDialogProps) {
   const [formValues, setFormValues] = useState({
     title: '',
     description: '',
-    status: 'backlog',
+    status: 'BACKLOG',
     story_points: '',
     developer: '',
   });
@@ -90,7 +90,9 @@ function AddStoryDialog({ developers, refetchStories }: AddStoryDialogProps) {
                   </Image>
                 </button>
               </div>
-              {error && <p className={style.errorMessage}>{error}</p>}
+              <div className={style.addStoryDialog__errorContainer}>
+                {error && <p className={style.errorMessage}>{error}</p>}
+              </div>
               <label htmlFor="title">Title:</label>
               <input type="text" id="title" name="title" value={formValues.title} onChange={handleInputChange} />
 

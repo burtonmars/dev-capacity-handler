@@ -4,14 +4,8 @@ import style from '../styles/stories.module.scss';
 import SubHeader from '../components/subheader';
 import StorySection from '../components/story-section';
 import { Developer, Story } from '../lib/types';
-import { statusBuckets } from '../lib/enums';
-
-interface Section {
-    title: string;
-    tag: string;
-    stories: Story[];
-}
-
+import { StatusEnum } from '../lib/enums';
+import { Section } from '../lib/types';
 interface StoriesProps {
   developers: Developer[];
   stories: Story[];
@@ -20,23 +14,19 @@ interface StoriesProps {
 
 const sections: Section[] = [
     {
-        "title": statusBuckets.BACKLOG,
-        "tag": "backlog",
+        "title": StatusEnum.BACKLOG,
         "stories": []
     },
     {
-        "title": statusBuckets.IN_PROGRESS,
-        "tag": "in_progress",
+        "title": StatusEnum.IN_PROGRESS,
         "stories": []
     },
     {
-        "title": statusBuckets.IN_REVIEW,
-        "tag": "in_review",
+        "title": StatusEnum.IN_REVIEW,
         "stories": []
     },
     {
-        "title": statusBuckets.DONE,
-        "tag": "done",
+        "title": StatusEnum.DONE,
         "stories": []
     }
 ];
@@ -48,7 +38,7 @@ function assignStoriesToSections(stories: Story[]) {
   }));
 
   stories.forEach((story) => {
-    const section = updatedSections.find((section) => section.tag === story.status);
+    const section = updatedSections.find((section) => section.title === story.status);
     if (section) {
       section.stories.push(story);
     }
@@ -70,7 +60,7 @@ function Stories({ developers, stories, refetchStories }: StoriesProps ) {
         <SubHeader developers={developers} tabTitle={'stories'} refetchStories={refetchStories}/>
         {sectionsData.map((section, index) => (
             <div key={index} className={style.stories__section}>
-                <StorySection section={section} developers={developers}/>
+                <StorySection section={section} developers={developers} refetchStories={refetchStories}/>
             </div>
         ))}
     </div>

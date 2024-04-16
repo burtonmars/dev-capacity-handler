@@ -1,5 +1,3 @@
-import { ObjectId } from 'mongodb'
-
 export type Story = {
   _id: string
   title: string
@@ -21,7 +19,6 @@ export type Developer = {
 
 export type Section = {
   title: string
-  tag: string
   stories: Story[]
 }
 

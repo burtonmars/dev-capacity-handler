@@ -6,18 +6,14 @@ import dropDownArrow from '../../../public/assets/img/drop-down-arrow.svg'
 import dropDownArrowOpen from '../../../public/assets/img/drop-down-arrow-open.svg';
 import { Developer, Story } from '../lib/types';
 import StoriesList from './stories-list';
-
-interface Section {
-    title: string;
-    stories: Story[];
-}
-
+import { Section } from '../lib/types';
 interface StorySectionProps {
     section: Section;
     developers: Developer[];
+    refetchStories: () => void;
 }
 
-function StorySection({ section, developers }: StorySectionProps) {
+function StorySection({ section, developers, refetchStories }: StorySectionProps) {
   const [dropDownOpen, setDropDownOpen] = useState<boolean>(false);
 
   return (
@@ -37,7 +33,7 @@ function StorySection({ section, developers }: StorySectionProps) {
         </div>
         <h1>{section.title}</h1>
       </div>
-      {dropDownOpen && <StoriesList stories={section.stories} developers={developers}/>}
+      {dropDownOpen && <StoriesList stories={section.stories} developers={developers} refetchStories={refetchStories} />}
     </>
   )
 };
