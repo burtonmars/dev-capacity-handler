@@ -15,6 +15,7 @@
         justify-content: space-between;
         align-items: center;
         width: 15vw;
+        margin-right: 2.2rem;
         max-width: 100px;
     }
 
@@ -37,8 +38,9 @@
         background-color: var(--dev-color);
     }
 
-    .storyTab__points {
+    .storyTabs__points {
         font-size: 1.2rem;
+        font-weight: bold;
     }
 }
 

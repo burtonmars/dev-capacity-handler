@@ -17,22 +17,31 @@ interface PersonSectionProps {
 function PersonSection({ developer, stories, developers, refetchStories }: PersonSectionProps) {
   const [dropDownOpen, setDropDownOpen] = useState<boolean>(false);
   const fullName = developer.first_name + ' ' + developer.last_name;
+  const totalStoryPoints = stories.filter(story => story.developer === developer._id)
+    .reduce((acc, story) => acc + parseInt(String(story.story_points), 10), 0);
   const developerStories = stories.filter(story => story.developer === developer._id);
 
   return (
     <>
       <div className={style.personSection__container} onClick={() => setDropDownOpen(!dropDownOpen)}>
-        <div className={style.personSection__dropDownIcon}>
-              { dropDownOpen && <Image
-              className={style.personSection__dropDownArrow}
-              src={dropDownArrow}
-              alt='drop-down arrow closed'/> }
-              { !dropDownOpen && <Image
-              className={style.personSection__dropDownArrow} 
-              src={dropDownArrowOpen}
-              alt='drop-down arrow open'/> }
-          </div>
-          <h1>{fullName}</h1>
+        <div className={style.personSection__dropDownContainer}>
+          <div className={style.personSection__dropDownIcon}>
+                { dropDownOpen && <Image
+                className={style.personSection__dropDownArrow}
+                src={dropDownArrow}
+                alt='drop-down arrow closed'
+                height={25}/> }
+                { !dropDownOpen && <Image
+                className={style.personSection__dropDownArrow} 
+                src={dropDownArrowOpen}
+                alt='drop-down arrow open'
+                height={25}/> }
+            </div>
+            <h1>{fullName}</h1>
+        </div>
+        <div className={style.personSection__totalStoryPoints}>
+          <div>{totalStoryPoints}</div>
+        </div>
       </div>
       { dropDownOpen && 
         <div>

@@ -1,5 +1,6 @@
 .storySection__container {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     column-gap: 1rem;
     padding-left: 1rem;
@@ -8,9 +9,22 @@
     border-width: 2px;
     border-color: #ffffff;
 
+    .storySection__totalStoryPoints {
+        font-size: 1.2rem;
+        margin-right: 2.2rem;
+        padding-right: 1rem;
+        font-weight: bold;
+    }
+}
+
+.storySection__dropDownContainer {
+    display: flex;
+    align-items: center;    
+
     h1 {
         font-size: 1.4rem;
         font-weight: regular;
+        margin-left: 1rem;
     }
 
     .storySection__dropDownArrow {

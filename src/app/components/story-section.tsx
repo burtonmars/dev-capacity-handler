@@ -15,10 +15,12 @@ interface StorySectionProps {
 
 function StorySection({ section, developers, refetchStories }: StorySectionProps) {
   const [dropDownOpen, setDropDownOpen] = useState<boolean>(false);
+  const totalStoryPoints = section.stories.reduce((acc, story) => acc + parseInt(String(story.story_points), 10), 0);
 
   return (
     <>
     <div className={style.storySection__container} onClick={() => setDropDownOpen(!dropDownOpen)}>
+      <div className={style.storySection__dropDownContainer}>
         <div>
             { dropDownOpen && <Image 
             className={style.storySection__dropDownArrow}
@@ -33,6 +35,11 @@ function StorySection({ section, developers, refetchStories }: StorySectionProps
         </div>
         <h1>{section.title}</h1>
       </div>
+      <div className={style.storySection__totalStoryPoints}>
+        {totalStoryPoints}
+      </div>
+    </div>
+    
       {dropDownOpen && <StoriesList stories={section.stories} developers={developers} refetchStories={refetchStories} />}
     </>
   )
