@@ -11,6 +11,20 @@
     }
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.listStories__storyFadeIn {
+    animation: fadeIn 0.5s ease-out;
+}
+
 @media screen and (min-width: 800px) {
     .listStories__container {
         .listStories__storyContainer {

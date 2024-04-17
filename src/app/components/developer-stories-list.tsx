@@ -22,7 +22,7 @@ function DeveloperStoriesList({ stories, developers, refetchStories }: Developer
       {stories.length > 0 ? (
       <ul>
         {stories.map((story: Story, index: number) => (
-          <li key={index}>
+          <li key={index} className={style.developerStories__storyFadeIn}>
             <div className={style.developerStories__storyContainer} onClick={handleButtonClick}>
               <div className={style.developerStories__title}>
                 {story.title}

@@ -20,7 +20,7 @@ function StoriesList({ stories, developers, refetchStories }: StoriesListProps )
         {stories.length > 0 ?
         (<ul>
           {stories.map((story: Story, index: number) => (
-            <li key={story._id}>
+            <li key={story._id} className={style.listStories__storyFadeIn}>
               <StoryTab story={story} developerInfo={storyTabDeveloperInfo.filter((info) => {
                 return info.storyId === story._id;
               })}  developers={developers} refetchStories={refetchStories}/>
