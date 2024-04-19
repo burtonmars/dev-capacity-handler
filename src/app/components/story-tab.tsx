@@ -25,9 +25,16 @@ function StoryTab({ story, developerInfo, developers, refetchStories }: StoryTab
             {story.title}
             </div>
             <div className={style.storyTab__developerAndStoryPointsContainer}>
-                <div   className={style.storyTab__developerColorIcon} style={{backgroundColor: `#${developerInfo[0].color}` }}>
-                    {developerInfo[0].developerInitials}
-                </div>
+                {developerInfo[0] && (  
+                    <div   className={style.storyTab__developerColorIcon} style={{backgroundColor: `#${developerInfo[0]?.color}` }}>
+                        {developerInfo[0].developerInitials}
+                    </div>
+                )}
+                {!developerInfo[0] && (  
+                    <div   className={style.storyTab__developerColorIcon} style={{backgroundColor: `#808080` }}>
+                        {'...'}
+                    </div>
+                )}
                 <div className={style.storyTabs__points}>
                     {story.story_points}
                 </div>

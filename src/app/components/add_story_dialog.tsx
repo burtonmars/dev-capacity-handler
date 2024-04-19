@@ -4,9 +4,6 @@ import Image from 'next/image';
 import closeWindow from '../../../public/assets/img/close-window.webp'
 import style from '../styles/add-story-dialog.module.scss';
 import { fibonacciNumbers } from '../lib/data';
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
-import { Story } from '../lib/types';
 
 interface AddStoryDialogProps {
   developers: any[];
@@ -24,6 +21,19 @@ function AddStoryDialog({ developers, refetchStories }: AddStoryDialogProps) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
+  const [validationErrors, setValidationErrors] = useState({
+    title: '',
+    description: '',
+    story_points: '',
+  });
+
+  const validateForm = () => {
+    const errors: { title?: string, description?: string, story_points?: string } = {};
+    if (!formValues.title) errors.title = 'Title is required';
+    if (!formValues.description) errors.description = 'Description is required';
+    if (!formValues.story_points) errors.story_points = 'required';
+    return errors;
+  };
 
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
@@ -31,10 +41,26 @@ function AddStoryDialog({ developers, refetchStories }: AddStoryDialogProps) {
       ...prevValues,
       [name]: value,
     }));
+
+    if ((validationErrors as { [key: string]: string })[name]) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: '',
+      }));
+    }
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors({
+        title: errors.title || '',
+        description: errors.description || '',
+        story_points: errors.story_points || '',
+      });
+      return;
+    }
     setIsSubmitting(true);
     setError(null);
 
@@ -93,11 +119,14 @@ function AddStoryDialog({ developers, refetchStories }: AddStoryDialogProps) {
               <div className={style.addStoryDialog__errorContainer}>
                 {error && <p className={style.errorMessage}>{error}</p>}
               </div>
-              <label htmlFor="title">Title:</label>
+              <label htmlFor="title">*Title:</label>
               <input type="text" id="title" name="title" value={formValues.title} onChange={handleInputChange} />
-
-              <label htmlFor="description">Description:</label>
+              {validationErrors.title && 
+                <p className={style.addStoryDialog__requiredMessage}>{validationErrors.title}</p>}
+              
+              <label htmlFor="description">*Description:</label>
               <textarea id="description" name="description" value={formValues.description} onChange={handleInputChange}></textarea>
+              {validationErrors.description && <p className={style.addStoryDialog__requiredMessage}>{validationErrors.description}</p>}
 
               <div className={style.addStoryDialog__dialogueDropDowns}>
                 <div className={style.addStoryDialog__dialogueDropDownLeft}>
@@ -112,7 +141,7 @@ function AddStoryDialog({ developers, refetchStories }: AddStoryDialogProps) {
                   </select>
                 </div>
                 <div className={style.addStoryDialog__dialogueDropDownRight}>
-                  <label htmlFor="story_points">Story Points:</label>
+                  <label htmlFor="story_points">*Story Points:</label>
                   <select id="story_points" name="story_points" value={formValues.story_points} onChange={handleInputChange}>
                     <option value="">Select Points</option>
                     {fibonacciNumbers.map((number) => (
@@ -121,6 +150,7 @@ function AddStoryDialog({ developers, refetchStories }: AddStoryDialogProps) {
                       </option>
                     ))}
                   </select>
+                  {validationErrors.story_points && <p className={style.addStoryDialog__requiredMessage}>{validationErrors.story_points}</p>}
                 </div>
               </div>
 
