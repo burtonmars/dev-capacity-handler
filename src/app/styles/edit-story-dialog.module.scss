@@ -58,19 +58,26 @@
         height: 100px;
     }
 
-    .dialogBox form .dialogActions {
+    .dialogBox form .editStoryDialog__dialogActions {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
         margin-top: 1rem;
 
         button {
             font-size: 1.2rem;
-            background-color: var(--color-text-blue);
             color: #fff;
             width: 15vw;
             min-width: 80px;
             max-width: 110px;
             border-radius: 4px;
+        }
+
+        .editStoryDialog__deleteBtn {
+            background-color: var(--color-text-red);
+        }
+
+        .editStoryDialog__submitBtn {
+            background-color: var(--color-text-blue);
         }
     }
 
@@ -85,7 +92,6 @@
 
     button {
         border: none;
-        background-color: var(--color-background);
         font-size: 1.2rem;
         cursor: pointer;
     }

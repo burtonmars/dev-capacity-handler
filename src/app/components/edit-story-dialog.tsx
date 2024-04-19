@@ -23,6 +23,7 @@ const EditStoryDialog = ({ developers, story, setShowPopup, refetchStories }: Ed
     developer: story.developer,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState(null);
   const statusBuckets = Object.values(StatusEnum);
 
@@ -38,7 +39,6 @@ const EditStoryDialog = ({ developers, story, setShowPopup, refetchStories }: Ed
     event.preventDefault();
     setIsSubmitting(true);
     setError(null);
-    console.log(formValues);
 
     try {
       const response = await fetch('/api/stories', {
@@ -58,6 +58,32 @@ const EditStoryDialog = ({ developers, story, setShowPopup, refetchStories }: Ed
       setError(error.message);
     } finally {
       setIsSubmitting(false);
+      refetchStories();
+    }
+  };
+
+  const handleDelete = async () => {
+    setIsDeleting(true);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/stories', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ _id: formValues._id }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to delete the story');
+      }
+      setShowPopup(false);
+    } catch (error: any) {
+      setError(error.message);
+    } finally {
+      setIsDeleting(false);
       refetchStories();
     }
   };
@@ -120,8 +146,11 @@ const EditStoryDialog = ({ developers, story, setShowPopup, refetchStories }: Ed
                 </div>
               </div>
 
-              <div className={style.dialogActions}>
-               <button type="submit" disabled={isSubmitting}>
+              <div className={style.editStoryDialog__dialogActions}>
+                <button onClick={handleDelete} className={style.editStoryDialog__deleteBtn} disabled={isSubmitting || isDeleting}>
+                  {isDeleting ? 'Deleting...' : 'Delete'}
+                </button>
+               <button className={style.editStoryDialog__submitBtn} type="submit" disabled={isSubmitting || isDeleting}>
                   {isSubmitting ? 'Saving...' : 'Save'}
                 </button>
               </div>

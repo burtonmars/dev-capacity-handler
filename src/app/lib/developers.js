@@ -34,7 +34,6 @@ export async function getDeveloperById(developerId) {
     if (!developers) await init()
 
     const objectId = ObjectId.createFromHexString(developerId)
-    console.log(objectId)
 
     const result = await developer
       .find({ where: { _id: objectId } })

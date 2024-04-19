@@ -57,3 +57,19 @@ export async function updateStory(story) {
     return { success: false, error: 'Failed to update the story' }
   }
 }
+
+export async function deleteStory(story) {
+  try {
+    if (!stories) await init()
+    const result = await stories.deleteOne({
+      _id: ObjectId.createFromHexString(story._id),
+    })
+    if (result.deletedCount === 0) {
+      return { success: false, error: 'No matching story record found' }
+    }
+    return { success: true }
+  } catch (error) {
+    console.error('Delete story error:', error)
+    return { success: false, error: 'Failed to delete the story' }
+  }
+}
