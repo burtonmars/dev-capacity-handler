@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import style from '../styles/stories-list.module.scss';
 import { Developer, DeveloperInfo, Story } from '../lib/types';
 import StoryTab from './story-tab';
-import EditStoryDialog from './edit-story-dialog';
 
 interface StoriesListProps {
   stories: Story[];

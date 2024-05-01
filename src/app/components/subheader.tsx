@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import style from '../styles/subheader.module.scss';
 import { Developer, Story } from '../lib/types';
-import AddStoryDialog from './add_story_dialog';
+import AddStoryDialog from './add-story-dialog';
 interface SubheaderProps {
     developers: Developer[];
     tabTitle: string;
